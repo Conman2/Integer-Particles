@@ -37,7 +37,9 @@ plane = numpy.empty((1000, 1000), dtype = object)
 
 plane[500,500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
 plane[501,500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
+plane[503,500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
 
-while (None is None):
-    print(plane[plane != numpy.array(None)])
+time_of_last_update = current_time()
+print( numpy.argwhere(plane) )
+print(current_time() - time_of_last_update)
         #if (particle.update(position) is not None):
