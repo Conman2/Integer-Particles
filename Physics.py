@@ -1,7 +1,6 @@
 from timeit import default_timer as current_time
 import time
 from random import randint as random_integer
-import numpy
 
 class Particle:
     """ Particle class represents an indivisable object on a 2D plane that is accelerated by forces and interacts with other Particles """
@@ -23,23 +22,20 @@ class Particle:
             acceleration = -1
             # Calculate velocity
             self.velocity[axis] = self.velocity[axis] + ( acceleration * elapsed_time )
-            # Change position
+            # Change position if needed
             if (elapsed_time >= 1 / abs( self.velocity[axis] )):
                 position[axis] = position[axis] + int( elapsed_time * self.velocity[axis] )
+                #Reset the timer
                 self.time_of_last_update[axis] = current_time()
-                return position
 
-#[Particle(X_velocity=random_integer(-10, 10), Y_position=random_integer(-1000, 1000), Y_velocity=random_integer(-10, 10), X_position=random_integer(-1000, 1000)) for count in range(30)]
+plane = [[None] * 1000 for i in range(1000)]
 
-Particle = numpy.vectorize(Particle)
-
-plane = numpy.empty((1000, 1000), dtype = object)
-
-plane[500,500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
-plane[501,500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
-plane[503,500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
+plane[500][500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
+plane[501][500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
+plane[503][500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
 
 time_of_last_update = current_time()
-print( numpy.argwhere(plane) )
+for column in plane:
+    for row in column:
+            print(row)
 print(current_time() - time_of_last_update)
-        #if (particle.update(position) is not None):
