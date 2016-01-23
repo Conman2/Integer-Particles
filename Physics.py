@@ -1,6 +1,7 @@
 from timeit import default_timer as current_time
 import time
 from random import randint as random_integer
+import numpy
 
 class Particle:
     """ Particle class represents an indivisable object on a 2D plane that is accelerated by forces and interacts with other Particles """
@@ -28,14 +29,12 @@ class Particle:
                 #Reset the timer
                 self.time_of_last_update[axis] = current_time()
 
-plane = [[None] * 1000 for i in range(1000)]
 
-plane[500][500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
-plane[501][500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
-plane[503][500] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
+plane = numpy.empty((1000, 1000), dtype = object)
+
+for count in range(1000):
+    plane[random_integer(10, 999),count] = Particle(X_velocity=random_integer(-10, 10), Y_velocity=random_integer(-10, 10))
 
 time_of_last_update = current_time()
-for column in plane:
-    for row in column:
-            print(row)
+print( numpy.all(plane=None) )
 print(current_time() - time_of_last_update)
